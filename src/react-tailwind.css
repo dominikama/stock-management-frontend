@@ -1,0 +1,28 @@
+.react-select__control {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full h-10 flex items-center;
+  }
+  
+  .react-select__value-container {
+    @apply py-0;
+  }
+  
+  .react-select__single-value {
+    @apply leading-none;
+  }
+  
+  .react-select__menu {
+    @apply bg-white border border-gray-300 rounded-lg shadow-lg z-10;
+  }
+  
+  .react-select__option {
+    @apply text-gray-900 bg-white cursor-pointer select-none px-4;
+  }
+  
+  .react-select__option--is-selected {
+    @apply bg-primary-600 text-white;
+  }
+  
+  .react-select__option--is-focused {
+    @apply bg-blue-100;
+  }
+  
