@@ -3,7 +3,7 @@
   }
   
   .react-select__value-container {
-    @apply py-0;
+    @apply py-0 bg-gray-50;
   }
   
   .react-select__single-value {
@@ -15,7 +15,7 @@
   }
   
   .react-select__option {
-    @apply text-gray-900 bg-white cursor-pointer select-none px-4;
+    @apply text-gray-900 bg-gray-50 cursor-pointer select-none px-4;
   }
   
   .react-select__option--is-selected {

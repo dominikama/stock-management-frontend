@@ -2,11 +2,15 @@ import React from 'react';
 import WarehouseDetailsToggle from './toggles/WarehouseDetailsToggle';
 import WarehouseUpdateFormToggle from './toggles/WarehouseUpdateFormToggle';
 import WarehouseDeleteToggle from './toggles/WarehouseDeleteToggle';
-import { useWarehouses } from '../../hooks/useWarehouses';
+import { useFetchWarehouses } from '../../hooks/fetchWarehouses';
 import Table from '../common/Table';
 
 const WarehousesTable = () => {
-    const { warehouses, error, isLoading } = useWarehouses();
+  const { warehouses, error, isLoading } = useFetchWarehouses();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message} (Code: {error.responseCode})</div>;
+
 
   const columns = [
     { key: 'number', title: 'Code', dataIndex: 'number' },
@@ -28,9 +32,6 @@ const WarehousesTable = () => {
       ),
     },
   ];
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{`Błąd: ${error.message}`}</div>;
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

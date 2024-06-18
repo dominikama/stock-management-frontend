@@ -1,23 +1,28 @@
-const BASE_URL = 'http://localhost:8080/warehouses';
+const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+const WAREHOUSES_URL = `${BASE_URL}/warehouses`;
+
 
 export const fetchWarehouses = async () => {
-  const response = await fetch(BASE_URL);
+  const response = await fetch(WAREHOUSES_URL);
   if (!response.ok) {
-    throw new Error('Error while fetching warehouses');
+    const errorData = await response.json();
+    console.log("Fetch error:", errorData.message);
+    throw { message: errorData.message || 'Error while fetching warehouse', responseCode: response.status };
   }
   return response.json();
 };
 
 export const fetchWarehouseById = async (id) => {
-  const response = await fetch(`${BASE_URL}/${id}`);
+  const response = await fetch(`${WAREHOUSES_URL}/${id}`);
   if (!response.ok) {
-    throw new Error('Error during fetching warehouse data');
+    const errorData = await response.json();
+    throw { message: errorData.message || 'Error while fetching warehouse', responseCode: response.status };
   }
   return response.json();
 };
 
 export const addWarehouse = async (newWarehouse) => {
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(WAREHOUSES_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -26,14 +31,15 @@ export const addWarehouse = async (newWarehouse) => {
   });
 
   if (!response.ok) {
-    throw new Error('Error while creating warehouse');
+    const errorData = await response.json();
+    throw { message: errorData.message || 'Error while creating warehouse', responseCode: response.status };  
   }
 
   return response.json();
 };
 
 export const updateWarehouse = async (updatedWarehouse) => {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(WAREHOUSES_URL, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +48,8 @@ export const updateWarehouse = async (updatedWarehouse) => {
     });
   
     if (!response.ok) {
-      throw new Error('Error while updating warehouse');
+      const errorData = await response.json();
+      throw { message: errorData.message || 'Error while updating warehouse', responseCode: response.status };
     }
   
     return updatedWarehouse;
@@ -50,12 +57,13 @@ export const updateWarehouse = async (updatedWarehouse) => {
   
 
 export const deleteWarehouse = async (id) => {
-  const response = await fetch(`${BASE_URL}/${id}`, {
+  const response = await fetch(`${WAREHOUSES_URL}/${id}`, {
     method: 'DELETE',
   });
 
   if (!response.ok) {
-    throw new Error('Error while deleting warehouse');
+    const errorData = await response.json();
+    throw { message: errorData.message || 'Error while deleting warehouse', responseCode: response.status };
   }
 
   return id;

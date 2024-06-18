@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import WarehouseDetails from '../WarehouseDetails';
 import { ReactComponent as ViewIcon } from '../../../assets/icons/view-icon.svg';
 import { useWarehouseById } from '../../../hooks/useWarehouseById';
+import ErrorModal from '../../common/ErrorModal';
 
 const WarehouseDetailsToggle = ({ warehouseId }) => {
   const [showWarehouseDetails, setShowWarehouseDetails] = useState(false);
-  const { data: warehouse, error, isLoading } = useWarehouseById(warehouseId);
+  const { data: warehouse, error, setError } = useWarehouseById(warehouseId);
 
 
   const handleViewClick = (e) => {
@@ -15,6 +16,7 @@ const WarehouseDetailsToggle = ({ warehouseId }) => {
 
   return (
     <div>
+      <ErrorModal error={error} onClose={() => setError(null)}/>
       <a
         href="#"
         onClick={handleViewClick}

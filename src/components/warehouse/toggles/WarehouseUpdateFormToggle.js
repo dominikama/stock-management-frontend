@@ -3,10 +3,11 @@ import WarehouseFormTemplate from '../forms/WarehouseFormTemplate';
 import { ReactComponent as EditIcon } from '../../../assets/icons/edit-icon.svg';
 import { useWarehouses } from '../../../hooks/useWarehouses';
 import { useWarehouseById } from '../../../hooks/useWarehouseById';
+import ErrorModal from '../../common/ErrorModal';
 
 const WarehouseUpdateFormToggle = ({ warehouseId }) => {
   const [showForm, setShowForm] = useState(false);
-  const { updateMutation } = useWarehouses();
+  const { updateMutation, error, setError } = useWarehouses();
   const { data: warehouse } = useWarehouseById(warehouseId);
 
   const handleSubmit = (data) => {
@@ -25,6 +26,7 @@ const WarehouseUpdateFormToggle = ({ warehouseId }) => {
 
   return (
     <div>
+      <ErrorModal error={error} onClose={() => setError(null)}/>
       <a
         href="#"
         onClick={handleViewClick}

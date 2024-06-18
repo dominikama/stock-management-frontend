@@ -13,8 +13,9 @@ const CustomSelect = ({ id, label, name, value, onChange, options, className }) 
         name={name}
         onChange={onChange}
         options={options}
-        className="react-select-container"
+        className="react-select-container bg-gray-50"
         classNamePrefix="react-select"
+        required
       />
     </div>
   );

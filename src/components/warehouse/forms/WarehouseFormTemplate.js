@@ -5,7 +5,6 @@ import Checkbox from '../../common/Checkbox';
 import Input from '../../common/Input';
 import CustomSelect from '../../common/CustomSelect';
 
-
 const WarehouseFormTemplate = ({ initialData, onSubmit, title, buttonText, showForm, setShowForm }) => {
     const [formData, setFormData] = useState({
       name: '',
@@ -46,6 +45,7 @@ const WarehouseFormTemplate = ({ initialData, onSubmit, title, buttonText, showF
       setShowForm(false)
       onSubmit(formData);
     };
+
     return (
       <>
       {showForm && (
@@ -56,7 +56,7 @@ const WarehouseFormTemplate = ({ initialData, onSubmit, title, buttonText, showF
           showForm ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <div className="relative p-4 w-full max-w-2xl h-full md:h-auto overflow-y-auto">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -85,15 +85,15 @@ const WarehouseFormTemplate = ({ initialData, onSubmit, title, buttonText, showF
             </div>
             <form onSubmit={handleSubmit}>
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
-                <Input id="name" label="Name" name="name" value={formData.name} onChange={handleChange} placeholder="Silver" type="text" />
-                <Input id="number" label="Number" name="number" value={formData.number} onChange={handleChange} placeholder="WH123" type="text" />
+                <Input id="name" label="Name" name="name" value={formData.name} onChange={handleChange} placeholder="Silver" type="text" className="w-full" />
+                <Input id="number" label="Number" name="number" value={formData.number} onChange={handleChange} placeholder="WH123" type="text" className="w-full" />
                 <CustomSelect id="country" label="Country" name="country" value={countryOptions.find(option => option.value === formData.country)} onChange={handleCountryChange}
-                    options={countryOptions}/>
-                <Input id="city" label="City" name="city" value={formData.city} onChange={handleChange} placeholder="London" type="text" />
-                <Input id="postalCode" label="Postal code" name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="34-309" type="text" />
-                <Input id="address" label="Address" name="address" value={formData.address} onChange={handleChange} placeholder="St.Olivers" type="text" />
-                <Checkbox id="enabled" label="Enabled" checked={formData.enabled} onChange={handleChange} className="sm:col-span-2" />
-                </div>
+                    options={countryOptions} className="w-full" />
+                <Input id="city" label="City" name="city" value={formData.city} onChange={handleChange} placeholder="London" type="text" className="w-full" />
+                <Input id="postalCode" label="Postal code" name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="34-309" type="text" className="w-full" />
+                <Input id="address" label="Address" name="address" value={formData.address} onChange={handleChange} placeholder="St.Olivers" type="text" className="w-full" />
+                <Checkbox id="enabled" label="Enabled" checked={formData.enabled} onChange={handleChange} className="sm:col-span-2 w-full" />
+              </div>
               <button
                 type="submit"
                 className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mx-auto"
